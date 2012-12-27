@@ -28,6 +28,7 @@
 
   var Typeahead = function (element, options) {
     this.$element = $(element)
+    this.$element.attr('autocomplete', 'off')
     this.options = $.extend({}, $.fn.typeahead.defaults, options)
     this.matcher = this.options.matcher || this.matcher
     this.sorter = this.options.sorter || this.sorter
