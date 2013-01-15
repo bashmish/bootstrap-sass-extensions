@@ -31,7 +31,7 @@
 
   var Autocomplete = function(element, options) {
     Typeahead.apply(this, [element, options])
-    this.$hidden_input = $('<input type="hidden" name=""/>')
+    this.$hidden_input = this.$element.prev('input:hidden')
     this.last_processed_source = {}
     this.initializeHiddenInput()
   }
@@ -46,19 +46,13 @@
 
   , initializeHiddenInput: function () {
       this.$element.after(this.$hidden_input)
-      this.transferName()
-      this.initializeValues()
+      this.initializeLabel()
     }
 
-  , transferName: function () {
-      this.$hidden_input.attr('name', this.$element.attr('name'))
-      this.$element.removeAttr('name', '')
-    }
-
-  , initializeValues: function () {
-      var value = this.$element.val()
-      this.$hidden_input.val(value)
-      this.$element.val(this.source[value])
+  , initializeLabel: function () {
+      var value = this.$hidden_input.val()
+      var label = this.source[value]
+      this.$element.val(label)
     }
 
   , process: function (items) {
