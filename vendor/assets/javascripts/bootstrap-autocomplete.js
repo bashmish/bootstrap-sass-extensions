@@ -32,7 +32,12 @@
   var Autocomplete = function(element, options) {
     Typeahead.apply(this, [element, options])
     this.$hidden_input = this.$element.prev('input:hidden')
-    this.last_processed_source = {}
+    
+    if(options['source'])
+      this.last_processed_source = options['source'];
+    else
+      this.last_processed_source = {};
+    
     this.initializeHiddenInput()
   }
 
