@@ -32,12 +32,6 @@
   var Autocomplete = function(element, options) {
     Typeahead.apply(this, [element, options])
     this.$hidden_input = this.$element.prev('input:hidden')
-    
-    if(options['source'])
-      this.last_processed_source = options['source'];
-    else
-      this.last_processed_source = {};
-
     this.initializeLabel()
   }
 
@@ -72,8 +66,10 @@
     }
 
   , blur: function (e) {
-      var label = this.$element.val()
-      this.$element.val(this.updater(label))
+      if (typeof this.last_processed_source != 'undefined') {
+        var label = this.$element.val()
+        this.$element.val(this.updater(label))
+      }
       return Typeahead.prototype.blur.apply(this, [e])
     }
 
