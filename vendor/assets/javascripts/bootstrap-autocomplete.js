@@ -37,8 +37,8 @@
       this.last_processed_source = options['source'];
     else
       this.last_processed_source = {};
-    
-    this.initializeHiddenInput()
+
+    this.initializeLabel()
   }
 
 
@@ -48,11 +48,6 @@
   Autocomplete.prototype = $.extend({}, Typeahead.prototype, {
 
     constructor: Autocomplete
-
-  , initializeHiddenInput: function () {
-      this.$element.after(this.$hidden_input)
-      this.initializeLabel()
-    }
 
   , initializeLabel: function () {
       var value = this.$hidden_input.val()
@@ -70,7 +65,7 @@
       var found_values = $.map(this.last_processed_source, function (v, k) { if (v == label) return k })
       var value = found_values[0]
       if (typeof value == 'undefined') {
-        label = '';
+        label = ''
       }
       this.$hidden_input.val(value)
       return Typeahead.prototype.updater.apply(this, [label])
