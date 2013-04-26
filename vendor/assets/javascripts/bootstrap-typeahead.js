@@ -59,12 +59,22 @@
       return typeof this.source == 'string' && this.source.match("^https?://")
     }
 
-  , select: function () {
+  , select: function (event) {
       var val = this.$menu.find('.active').attr('data-value')
-      this.$element
-        .val(this.updater(val))
-        .change()
-      return this.hide()
+      this.$element.val(this.updater(val)).change()
+
+      var keycode  = event.keyCode,
+          onselect = this.options['select'];
+
+      if (keycode != 9 && onselect) {
+        switch(onselect) {
+          case 'next':
+            this.$element.next().focus();
+            break
+        };
+      };
+
+      return this.hide();
     }
 
   , updater: function (item) {
@@ -213,7 +223,7 @@
 
       switch(e.keyCode) {
         case 9: // tab
-          this.select()
+          this.select(e)
           break
 
         case 13: // enter
@@ -257,7 +267,7 @@
         case 9: // tab
         case 13: // enter
           if (!this.shown) return
-          this.select()
+          this.select(e)
           break
 
         case 27: // escape
@@ -281,7 +291,7 @@
   , click: function (e) {
       e.stopPropagation()
       e.preventDefault()
-      this.select()
+      this.select(e)
     }
 
   , mouseenter: function (e) {
