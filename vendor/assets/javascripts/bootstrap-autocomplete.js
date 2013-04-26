@@ -55,6 +55,17 @@
       return Typeahead.prototype.process.apply(this, [labels])
     }
 
+  , select: function () {
+      Typeahead.prototype.select.apply(this);
+
+      var onselect = this.options['select'];
+      switch(onselect) {
+        case 'next':
+          this.$element.next().focus();
+          break
+      };
+    }
+
   , updater: function (label) {
       var found_values = $.map(this.last_processed_source, function (v, k) { if (v == label) return k })
       var value = found_values[0]
