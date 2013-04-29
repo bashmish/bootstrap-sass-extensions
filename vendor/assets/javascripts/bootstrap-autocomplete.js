@@ -99,9 +99,14 @@
  /* AUTOCOMPLETE DATA-API
   * ===================== */
 
-  $('[data-provide="autocomplete"]').each(function () {
-    var $this = $(this)
-    $this.autocomplete2($this.data())
-  })
+  function init() {
+    $('[data-provide="autocomplete"]').each(function () {
+      var $this = $(this)
+      $this.autocomplete2($this.data())
+    })
+  }
+
+  $(function () { init() })
+  $(document).on('ajaxComplete', function () { init() })
 
 }(window.jQuery);
