@@ -32,7 +32,9 @@
   var Autocomplete = function(element, options) {
     Typeahead.apply(this, [element, options])
     this.$hidden_input = this.$element.prev('input:hidden')
-    this.initializeLabel()
+    if (this.labelIsEmpty()) {
+      this.initializeLabel()
+    }
   }
 
 
@@ -42,6 +44,10 @@
   Autocomplete.prototype = $.extend({}, Typeahead.prototype, {
 
     constructor: Autocomplete
+
+  , labelIsEmpty: function() {
+      return this.$element.val() == ''
+    }
 
   , initializeLabel: function () {
       var value = this.$hidden_input.val()
