@@ -37,7 +37,7 @@
     this.$menu = $(this.options.menu).appendTo('body')
     this.source = this.options.source
 
-    if (this.sourceIsRemote()) {
+    if (this.sourceIsURL()) {
       var template = this.source
       this.source = function (query, process_function) {
         var url = template.replace('%query%', query)
@@ -55,8 +55,8 @@
 
     constructor: Typeahead
 
-  , sourceIsRemote: function () {
-      return typeof this.source == 'string' && this.source.match("^https?://")
+  , sourceIsURL: function () {
+      return typeof this.source == 'string' && (this.source.match("^https?://") || this.source.match("^/"))
     }
 
   , select: function (event) {
