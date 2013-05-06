@@ -32,8 +32,10 @@
   var Autocomplete = function(element, options) {
     Typeahead.apply(this, [element, options])
     this.$hidden_input = this.$element.prev('input:hidden')
-    if (this.labelIsEmpty()) {
-      this.initializeLabel()
+    if ($.isFunction(this.source)) {
+      this.initializeForRemoteSource()
+    } else {
+      this.initializeForHashSource()
     }
   }
 
@@ -45,14 +47,20 @@
 
     constructor: Autocomplete
 
-  , labelIsEmpty: function() {
-      return this.$element.val() == ''
+  , initializeForRemoteSource: function() {
+      var that = this,
+          label = this.$element.val()
+      this.source(label, function (items) {
+        that.last_processed_source = items
+      })
     }
 
-  , initializeLabel: function () {
-      var value = this.$hidden_input.val()
-      var label = this.source[value]
-      this.$element.val(label)
+  , initializeForHashSource: function() {
+      if (this.$element.val() == '') {
+        var value = this.$hidden_input.val()
+        var label = this.source[value]
+        this.$element.val(label)
+      }
     }
 
   , process: function (items) {
