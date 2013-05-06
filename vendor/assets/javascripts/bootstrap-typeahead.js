@@ -37,7 +37,7 @@
     this.$menu = $(this.options.menu).appendTo('body')
     this.source = this.options.source
 
-    if (this.sourceIsURL()) {
+    if (typeof this.source == 'string' && (this.source.match("^https?://") || this.source.match("^/"))) {
       var template = this.source
       this.source = function (query, process_function) {
         var url = template.replace('%query%', query)
@@ -54,10 +54,6 @@
   Typeahead.prototype = {
 
     constructor: Typeahead
-
-  , sourceIsURL: function () {
-      return typeof this.source == 'string' && (this.source.match("^https?://") || this.source.match("^/"))
-    }
 
   , select: function (event) {
       var val = this.$menu.find('.active').attr('data-value')
