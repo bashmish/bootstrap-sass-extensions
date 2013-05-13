@@ -61,6 +61,7 @@
         var label = this.source[value]
         this.$element.val(label)
       }
+      this.last_processed_source = this.source
     }
 
   , process: function (items) {
