@@ -38,6 +38,7 @@
     this.source = this.options.source
 
     if (typeof this.source == 'string' && (this.source.match("^https?://") || this.source.match("^/"))) {
+      this.source_is_remote = true
       var template = this.source
       this.source = function (query, process_function) {
         var url = template.replace('%query%', query)
@@ -45,6 +46,8 @@
           process_function(json)
         })
       }
+    } else {
+      this.source_is_remote = false
     }
 
     this.shown = false

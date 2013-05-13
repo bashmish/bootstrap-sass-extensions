@@ -32,7 +32,7 @@
   var Autocomplete = function(element, options) {
     Typeahead.apply(this, [element, options])
     this.$hidden_input = this.$element.prev('input:hidden')
-    if ($.isFunction(this.source)) {
+    if (this.source_is_remote) {
       this.initializeForRemoteSource()
     } else {
       this.initializeForHashSource()
