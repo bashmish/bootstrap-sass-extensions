@@ -94,7 +94,7 @@
  /* AUTOCOMPLETE PLUGIN DEFINITION
   * ============================== */
 
-  $.fn.autocomplete2 = function (option) {
+  $.fn.autocomplete = function (option) {
     return this.each(function () {
       var $this = $(this)
         , data = $this.data('autocomplete')
@@ -104,11 +104,11 @@
     })
   }
 
-  $.fn.autocomplete2.defaults = $.extend({}, $.fn.typeahead.defaults, {
+  $.fn.autocomplete.defaults = $.extend({}, $.fn.typeahead.defaults, {
     source: []
   })
 
-  $.fn.autocomplete2.Constructor = Autocomplete
+  $.fn.autocomplete.Constructor = Autocomplete
 
 
  /* AUTOCOMPLETE DATA-API
@@ -117,7 +117,7 @@
   function init() {
     $('[data-provide="autocomplete"]').each(function () {
       var $this = $(this)
-      $this.autocomplete2($this.data())
+      $this.autocomplete($this.data())
     })
   }
 
