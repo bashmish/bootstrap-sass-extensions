@@ -31,6 +31,7 @@
 
   var Autocomplete = function(element, options) {
     Typeahead.apply(this, [element, options])
+    this.options = $.extend({}, $.fn.autocomplete.defaults, options)
     this.$hidden_input = this.$element.prev('input:hidden')
     if (this.source_is_remote) {
       this.initializeForRemoteSource()
@@ -105,7 +106,6 @@
   }
 
   $.fn.autocomplete.defaults = $.extend({}, $.fn.typeahead.defaults, {
-    source: []
   })
 
   $.fn.autocomplete.Constructor = Autocomplete
