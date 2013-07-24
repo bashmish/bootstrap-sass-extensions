@@ -74,7 +74,7 @@
   , updater: function (label) {
       var found_values = $.map(this.last_processed_source, function (v, k) { if (v == label) return k })
       var value = found_values[0]
-      if (typeof value == 'undefined') {
+      if (!this.options.arbitrary && typeof value == 'undefined') {
         label = ''
       }
       this.$hidden_input.val(value)
@@ -106,6 +106,7 @@
   }
 
   $.fn.autocomplete.defaults = $.extend({}, $.fn.typeahead.defaults, {
+    arbitrary: false
   })
 
   $.fn.autocomplete.Constructor = Autocomplete
