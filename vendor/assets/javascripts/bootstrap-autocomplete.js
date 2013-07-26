@@ -1,5 +1,5 @@
 /* ================================================================
- * bootstrap-autocomplete.js v2.2.1
+ * bootstrap-autocomplete.js v2.3.2
  * http://twitter.github.com/bootstrap/javascript.html#autocomplete
  * ================================================================
  * Copyright 2012 Twitter, Inc.
@@ -95,6 +95,8 @@
  /* AUTOCOMPLETE PLUGIN DEFINITION
   * ============================== */
 
+  var old = $.fn.autocomplete
+
   $.fn.autocomplete = function (option) {
     return this.each(function () {
       var $this = $(this)
@@ -110,6 +112,15 @@
   })
 
   $.fn.autocomplete.Constructor = Autocomplete
+
+
+ /* AUTOCOMPLETE NO CONFLICT
+  * ======================== */
+
+  $.fn.autocomplete.noConflict = function () {
+    $.fn.autocomplete = old
+    return this
+  }
 
 
  /* AUTOCOMPLETE DATA-API
