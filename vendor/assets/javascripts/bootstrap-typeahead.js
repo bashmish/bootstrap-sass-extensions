@@ -34,6 +34,7 @@
     this.sorter = this.options.sorter || this.sorter
     this.highlighter = this.options.highlighter || this.highlighter
     this.updater = this.options.updater || this.updater
+    this.value_updated = this.options.value_updated || this.value_updated
     this.source = this.options.source
     this.$menu = $(this.options.menu)
 
@@ -67,6 +68,7 @@
     }
 
   , updater: function (item) {
+      this.value_updated(item)
       return item
     }
 
@@ -305,6 +307,10 @@
   , mouseleave: function (e) {
       this.mousedover = false
       if (!this.focused && this.shown) this.hide()
+    }
+
+  , value_updated: function(value) {
+      // use your own one to watch for value update
     }
 
   }

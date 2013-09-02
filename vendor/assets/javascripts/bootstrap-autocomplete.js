@@ -32,6 +32,7 @@
   var Autocomplete = function(element, options) {
     Typeahead.apply(this, [element, options])
     this.options = $.extend({}, $.fn.autocomplete.defaults, options)
+    this.label_updated = this.options.label_updated || this.label_updated
     this.$hidden_input = this.$element.prev('input')
     if (this.source_is_remote) {
       this.initializeForRemoteSource()
@@ -77,8 +78,14 @@
       if (!this.options.arbitrary && typeof value == 'undefined') {
         label = ''
       }
+      this.value_updated(value)
       this.$hidden_input.val(value)
-      return Typeahead.prototype.updater.apply(this, [label])
+      this.label_updated(label)
+      return label
+    }
+
+  , label_updated: function(label) {
+      // use your own one to watch for label update
     }
 
   , blur: function (e) {
