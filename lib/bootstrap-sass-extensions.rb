@@ -1,9 +1,7 @@
-module Bootstrap
-  module Sass
-    module Extensions
-      class Engine < ::Rails::Engine
-        # auto wire assets
-      end
+module BootstrapSassExtensions
+  module Rails
+    class Engine < ::Rails::Engine
+      # auto wire assets
     end
   end
 end

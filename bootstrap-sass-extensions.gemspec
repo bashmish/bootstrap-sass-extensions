@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'bootstrap-sass-extensions'
-  s.version = '2.3.2.4'
+  s.version = '2.3.2.5'
   s.summary = 'Extensions for bootstrap-sass gem.'
   s.description = 'New and improved Bootstrap features on the foundation of bootstrap-sass gem.'
   s.authors = ['Misha Bashkirov']
