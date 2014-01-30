@@ -52,8 +52,8 @@
   , initializeForRemoteSource: function() {
       var that = this,
           label = this.$element.val()
-      this.source(label, function (items) {
-        that.last_processed_source = items
+      this.source(label, function (source) {
+        that.last_processed_source = prepare_source(source)
       })
     }
 
@@ -63,17 +63,17 @@
         var label = this.source[value]
         this.$element.val(label)
       }
-      this.last_processed_source = this.source
+      this.last_processed_source = prepare_source(this.source)
     }
 
-  , process: function (items) {
-      this.last_processed_source = items
-      var labels = $.map(items, function(v) { return v })
+  , process: function (source) {
+      this.last_processed_source = prepare_source(source)
+      var labels = $.map(this.last_processed_source, function(item) { return item[1] })
       return Typeahead.prototype.process.apply(this, [labels])
     }
 
   , updater: function (label) {
-      var found_values = $.map(this.last_processed_source, function (v, k) { if (v == label) return k })
+      var found_values = $.map(this.last_processed_source, function (item) { if (item[1] == label) return item[0] })
       var value = found_values[0]
       if (!this.options.arbitrary && typeof value == 'undefined') {
         label = ''
@@ -98,6 +98,14 @@
 
   })
 
+  var prepare_source = function (source) {
+    if ($.isPlainObject(source)) {
+      return $.map(source, function(v, k) {
+        return [[k, v]]
+      })
+    }
+    return source
+  }
 
  /* AUTOCOMPLETE PLUGIN DEFINITION
   * ============================== */
